@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+	<f:metadata>
+		<f:viewParam value="#{perfilDetalheBean.id}" name="id"/>
+		<f:viewParam value="#{permissoesBean.idPerfi}" name="id"/>
+		
+		<f:viewAction action="#{perfilDetalheBean.findById()}" />
+		<f:viewAction action="#{permissoesBean.findPerfil()}" />
+	</f:metadata>
+
+	<ui:composition 
+		xmlns:p="http://primefaces.org/ui"
+		template="/template/layout.xhtml">
+		
+		<ui:define name="content">
+		
+		    <p:layoutUnit position="center">
+		    
+		    	<p:fieldset legend="Permissões #{permissoesBean.perfil.descricao}" toggleable="true" toggleSpeed="500">
+		    	
+				    <p:pickList id="listPerfil" value="#{permissoesBean.dualListPermissao}" var="perfil" effect="bounce"
+				                itemValue="#{perfil}" itemLabel="#{perfil}" showCheckbox="true" responsive="true"
+				                filterMatchMode="contains" converter="converterPermissao">
+				                
+					    <f:facet name="sourceCaption">Disponíveis</f:facet>
+					    <f:facet name="targetCaption">Atribuídas</f:facet>
+					    
+					    <p:ajax event="transfer" listener="#{permissoesBean.onTransfer}" update="" />
+	    			                
+			    	</p:pickList>
+				
+		    	</p:fieldset>
+		    	
+		    </p:layoutUnit>
+		    
+	    </ui:define>
+	    
+		<ui:define name="script">
+		
+			<h:outputScript library="js" name="websocket.js"></h:outputScript>
+		    
+	    </ui:define>
+	    	
+	</ui:composition>
+	
+</html>

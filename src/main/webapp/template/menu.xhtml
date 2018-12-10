@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+	<ui:composition
+		xmlns:p="http://primefaces.org/ui">
+		
+	    <p:layoutUnit position="west" size="200" header="Menu" resizable="true" closable="true" collapsible="true">
+			<h:form>  
+			     <p:menu toggleable="true">
+					<p:submenu label="Perfis">
+	                	<p:menuitem value="Perfis" url="/perfis/perfis.xhtml" icon="ui-icon-folder-open"/>
+	                	<p:menuitem value="Cadastro Perfil" url="/perfis/cadastroPerfil.xhtml" icon="ui-icon-disk"/>
+			    	</p:submenu>
+					<p:submenu label="Usuarios">
+	                	<p:menuitem value="Usuarios" url="/usuarios/usuarios.xhtml" icon="ui-icon-folder-open"/>
+	                	<p:menuitem value="Cadastro Usuario" url="/usuarios/cadastroUsuario.xhtml" icon="ui-icon-disk"/>
+			    	</p:submenu>
+			    </p:menu>
+			</h:form>
+	    </p:layoutUnit>
+	        
+	</ui:composition>
+	
+</html>

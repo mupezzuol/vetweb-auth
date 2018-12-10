@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"	>
+
+	<f:metadata>
+		<f:viewParam value="#{usuarioBean.id}" name="id"/>
+		<f:viewAction action="#{usuarioBean.findById()}" />
+	</f:metadata>
+
+	<ui:composition
+		xmlns:p="http://primefaces.org/ui"
+		template="/template/layout.xhtml">
+		
+		<ui:define name="content">
+		
+		    <p:layoutUnit position="center">
+				<h:form enctype="multipart/form-data">
+					<p:fieldset legend="Cadastro Usuário" toggleable="true" toggleSpeed="500">
+					
+						<h:panelGrid columns="2" cellpadding="5" rendered="#{empty usuarioBean.id}">
+							<h:outputLabel value="Foto"/>
+							<h:inputFile value="#{usuarioBean.fotoUsuario}"/>
+						</h:panelGrid>
+						
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputLabel value="Nome"/>
+							<h:inputText value="#{usuarioBean.usuario.username}" pt:placeholder="Username"/>
+						</h:panelGrid>
+						
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputLabel value="Email"/>
+							<h:inputText value="#{usuarioBean.usuario.email}" pt:placeholder="email@email"/>
+						</h:panelGrid>
+						
+						<h:panelGrid columns="2" cellpadding="5" rendered="#{empty usuarioBean.id}">
+							<h:outputLabel value="Senha"/>
+							<h:inputSecret value="#{usuarioBean.usuario.password}" pt:placeholder="Password"/>
+						</h:panelGrid>
+						
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputLabel value="Perfil"/>
+							<h:selectManyListbox value="#{usuarioBean.usuario.perfis}" converter="perfilConverter">
+								<f:selectItems value="#{beanPerfil.all}" var="perfil" 
+									itemValue="#{perfil}" itemLabel="#{perfil.descricao}">
+								</f:selectItems>
+							</h:selectManyListbox>
+						</h:panelGrid>
+						
+						<h:commandButton action="#{usuarioBean.save}" value="Salvar"/>
+					
+					</p:fieldset>
+					<h:messages/>
+				
+				</h:form>		    		        
+		    </p:layoutUnit>
+		    
+	    </ui:define>
+	    	
+	</ui:composition>
+	
+</html>

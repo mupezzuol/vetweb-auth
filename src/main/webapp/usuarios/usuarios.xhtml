@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+	<ui:composition 
+		xmlns:p="http://primefaces.org/ui"
+		template="/template/layout.xhtml">
+		
+		<ui:define name="content">
+		
+		    <p:layoutUnit position="center">
+		    	
+		    	<h:outputText value="#{currentUser.get().username}"/>
+		    	
+				<p:dataTable var="usuario" value="#{usuarioListBean.usuarios}">
+					<p:column headerText="Nome">
+						<a href="#{request.contextPath}/usuarios/cadastroUsuario.xhtml?id=#{usuario.username}">#{usuario.username}</a>
+					</p:column>
+					<p:column headerText="Email">
+			            <f:facet name="header">Email</f:facet>
+							#{usuario.email}
+					</p:column>
+					<p:column headerText="Senha">
+			            <f:facet name="header">Senha</f:facet>
+							#{usuario.password}
+					</p:column>
+					<p:column headerText="Foto">
+			            <f:facet name="header">Foto</f:facet>
+			            <a href="#{request.contextPath}/usuarios/detalheUsuario.xhtml?id=#{usuario.username}">
+							<img src="#{request.contextPath}/arquivo/#{usuario.caminhoFoto}"
+								height="30%" alt="#{usuario.caminhoFoto}" />            
+			            </a>
+					</p:column>
+					<p:column headerText="Perfis">
+			            <f:facet name="header">Perfis</f:facet>
+							<ui:repeat var="perfil" value="#{usuario.perfis.toArray()}">
+								#{perfil.descricao} <br/>
+							</ui:repeat>
+					</p:column>
+				</p:dataTable>
+			
+				<h:messages/>
+						        
+		    </p:layoutUnit>
+		    
+	    </ui:define>
+	    	
+	</ui:composition>
+	
+</html>
